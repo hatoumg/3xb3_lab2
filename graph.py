@@ -139,6 +139,12 @@ def DFS3(G, node1):
                 S.append(node)
     return value
 
+def is_connected(G):
+    length = len(G.adj)
+    for node in G.adj:
+        if len(BFS3(G, node)) != length-1:
+            return False
+    return True
 
 #Use the methods below to determine minimum Vertex Covers
 def add_to_each(sets, element):
@@ -180,4 +186,4 @@ g.add_edge(3, 5)
 g.add_edge(3, 4)
 
 
-print(DFS3(g, 0))
+print(is_connected(g))
