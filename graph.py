@@ -69,6 +69,24 @@ def BFS2(G, node1, node2):
     return []
 
 
+#Breadth First Search
+def BFS3(G, node1):
+    l = {}
+    Q = deque([node1])
+    marked = {node1 : True}
+    for node in G.adj:
+        if node != node1:
+            marked[node] = False
+    while len(Q) != 0:
+        current_node = Q.popleft()
+        for node in G.adj[current_node]:
+            if not marked[node]:
+                l[node] = current_node
+                Q.append(node)
+                marked[node] = True
+    return l
+
+
 #Depth First Search
 def DFS(G, node1, node2):
     S = [node1]
@@ -146,4 +164,4 @@ g.add_edge(3, 5)
 g.add_edge(3, 4)
 
 
-print(DFS2(g, 0, 6))
+print(BFS3(g, 0))
