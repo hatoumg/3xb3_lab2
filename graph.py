@@ -123,6 +123,22 @@ def DFS2(G, node1, node2):
             value.pop()
     return value
 
+def DFS3(G, node1):
+    S = [node1]
+    value = {}
+    marked = {}
+    for node in G.adj:
+        marked[node] = False
+    while len(S) != 0:
+        current_node = S.pop()
+        if not marked[current_node]:
+            marked[current_node] = True
+            for node in G.adj[current_node]:
+                if node != node1 and not (node in value):
+                    value[node] = current_node
+                S.append(node)
+    return value
+
 
 #Use the methods below to determine minimum Vertex Covers
 def add_to_each(sets, element):
@@ -164,4 +180,4 @@ g.add_edge(3, 5)
 g.add_edge(3, 4)
 
 
-print(BFS3(g, 0))
+print(DFS3(g, 0))
