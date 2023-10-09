@@ -43,6 +43,31 @@ def BFS(G, node1, node2):
                 marked[node] = True
     return False
 
+#Breadth First Search
+def BFS2(G, node1, node2):
+    l = {}
+    l[node1] = node1
+    Q = deque([node1])
+    marked = {node1 : True}
+    for node in G.adj:
+        if node != node1:
+            marked[node] = False
+    while len(Q) != 0:
+        current_node = Q.popleft()
+        for node in G.adj[current_node]:
+            if node == node2:
+                value = [current_node, node2]
+                adding_node = current_node
+                while adding_node != node1:
+                    value = [l[adding_node]] + value
+                    adding_node = l[adding_node]
+                return value
+            if not marked[node]:
+                l[node] = current_node
+                Q.append(node)
+                marked[node] = True
+    return []
+
 
 #Depth First Search
 def DFS(G, node1, node2):
@@ -91,3 +116,14 @@ def MVC(G):
     return min_cover
 
 
+g = Graph(6)
+g.add_edge(0,1)
+g.add_edge(0,2)
+g.add_edge(1, 3)
+g.add_edge(2,3)
+g.add_edge(2,4)
+g.add_edge(3, 5)
+g.add_edge(3, 4)
+
+
+print(BFS2(g, 0, 5))
