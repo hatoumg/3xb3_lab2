@@ -103,7 +103,7 @@ def DFS2(G, node1, node2):
                 S.append(node)
         elif len(value)!=0:
             value.pop()
-    return []
+    return value
 
 
 #Use the methods below to determine minimum Vertex Covers
@@ -146,4 +146,4 @@ g.add_edge(3, 5)
 g.add_edge(3, 4)
 
 
-print(DFS2(g, 0, 5))
+print(DFS2(g, 0, 6))
