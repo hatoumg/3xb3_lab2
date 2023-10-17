@@ -49,14 +49,15 @@ def create_random_graph(num, n, m):
             if ((not graphs[i].are_connected(node1, node2)) and node1 != node2):
                 graphs[i].add_edge(node1, node2)
                 edges += 1
-    for j in range(num):
+    return graphs
+    """ for j in range(num):
         print("graph: ", j)
         for k in range(n):
             print("node: ", k)
             print(graphs[j].adjacent_nodes(k))
-
+ """
 def main():
-    create_random_graph(1,8,5)
+    create_random_graph(1000,8,1)
 
 if __name__ == "__main__":
     main()
