@@ -1,6 +1,8 @@
-from graph.py import *
+from graph import *
 from random import randrange
 import matplotlib as plt
+
+#Approximation algorithm implementations
 
 def approx1(G):
     graph = G
@@ -33,3 +35,28 @@ def approx3(G):
         graph[u] = []
         graph[v] = []
     return C
+
+#For experiments
+
+def create_random_graph(num, n, m):
+    graphs = []
+    for i in range(num):
+        edges = 0
+        graphs.append(Graph(n))
+        while edges < m:
+            node1 = randrange(n)
+            node2 = randrange(n)
+            if ((not graphs[i].are_connected(node1, node2)) and node1 != node2):
+                graphs[i].add_edge(node1, node2)
+                edges += 1
+    for j in range(num):
+        print("graph: ", j)
+        for k in range(n):
+            print("node: ", k)
+            print(graphs[j].adjacent_nodes(k))
+
+def main():
+    create_random_graph(1,8,5)
+
+if __name__ == "__main__":
+    main()
