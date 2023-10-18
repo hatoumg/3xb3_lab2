@@ -1,4 +1,5 @@
 from collections import deque
+from itertools import combinations
 
 #Undirected graph using an adjacency list
 class Graph:
@@ -7,6 +8,9 @@ class Graph:
         self.adj = {}
         for i in range(n):
             self.adj[i] = []
+
+    def get_node_list(self):    #
+        return self.adj.keys()  #
 
     def are_connected(self, node1, node2):
         return node2 in self.adj[node1]
@@ -22,8 +26,8 @@ class Graph:
             self.adj[node1].append(node2)
             self.adj[node2].append(node1)
 
-    def number_of_nodes():
-        return len()
+    def number_of_nodes(self):  #
+        return len(self.adj)    #
 
 
 #Breadth First Search
@@ -166,7 +170,7 @@ def is_vertex_cover(G, C):
     return True
 
 def MVC(G):
-    nodes = [i for i in range(G.get_size())]
+    nodes = [i for i in range(G.number_of_nodes())]
     subsets = power_set(nodes)
     min_cover = nodes
     for subset in subsets:
@@ -174,7 +178,6 @@ def MVC(G):
             if len(subset) < len(min_cover):
                 min_cover = subset
     return min_cover
-
 
 g = Graph(6)
 g.add_edge(0,1)
@@ -186,4 +189,5 @@ g.add_edge(3, 5)
 g.add_edge(3, 4)
 
 
-print(is_connected(g))
+#print(is_connected(g))
+#print(MVC(g))
