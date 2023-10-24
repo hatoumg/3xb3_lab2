@@ -1,4 +1,5 @@
 from collections import deque
+from tabnanny import check
 
 #Undirected graph using an adjacency list
 class Graph:
@@ -139,6 +140,35 @@ def DFS3(G, node1):
                 S.append(node)
     return value
 
+def check_cycle(G, node1, node2, v, m):
+    for node in g.adj[node1]:
+        if not m[node]:
+            v[node] = node1
+        if node == node2 and v[node1] != node2:
+            return True
+        elif not m[node] and v[node1] != node:
+            return check_cycle(G, node, node2, v, m)
+        m[node] = True
+    return False
+
+
+def marked(G, node1):
+    v = {}
+    for node in G.adj:
+        v[node] = False
+    v[node1] = True
+    return v
+
+def has_cycle(G):
+    v, m = {}, {}
+    for node in G.adj:
+        print(node)
+        v[node], m = node, marked(G, node)
+        if check_cycle(G, node, node, v, m):
+            return True
+        v = {}
+    return False
+
 def is_connected(G):
     length = len(G.adj)
     for node in G.adj:
@@ -186,4 +216,4 @@ g.add_edge(3, 5)
 g.add_edge(3, 4)
 
 
-print(is_connected(g))
+print(has_cycle(g))
