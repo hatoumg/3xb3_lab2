@@ -145,7 +145,7 @@ def DFS3(G, node1):
     return value
 
 def check_cycle(G, node1, node2, v, m):
-    for node in g.adj[node1]:
+    for node in G.adj[node1]:
         if not m[node]:
             v[node] = node1
         if node == node2 and v[node1] != node2:
@@ -166,7 +166,6 @@ def marked(G, node1):
 def has_cycle(G):
     v, m = {}, {}
     for node in G.adj:
-        print(node)
         v[node], m = node, marked(G, node)
         if check_cycle(G, node, node, v, m):
             return True
@@ -209,6 +208,7 @@ def MVC(G):
                 min_cover = subset
     return min_cover
 
+"""""
 g = Graph(6)
 g.add_edge(0,1)
 g.add_edge(0,2)
@@ -217,8 +217,4 @@ g.add_edge(2,3)
 g.add_edge(2,4)
 g.add_edge(3, 5)
 g.add_edge(3, 4)
-
-
-print(has_cycle(g))
-#print(is_connected(g))
-#print(MVC(g))
+"""""
