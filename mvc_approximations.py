@@ -64,13 +64,8 @@ def create_random_graph(num, n, m):
                 graphs[i].add_edge(node1, node2)
                 edges += 1
     return graphs
-    """ for j in range(num):
-        print("graph: ", j)
-        for k in range(n):
-            print("node: ", k)
-            print(graphs[j].adjacent_nodes(k))
- """
-def main():
+
+def experiment1():
     graph_sizes = []
     a1_performance = []
     a2_performance = []
@@ -94,15 +89,64 @@ def main():
         a1_performance.append(sum1/sum_mvc)
         a2_performance.append(sum2/sum_mvc)
         a3_performance.append(sum3/sum_mvc)
-    plt.plot(graph_sizes, a1_performance)
-    plt.plot(graph_sizes, a2_performance)
-    plt.plot(graph_sizes, a3_performance)
-    plt.legend(["approx1 performance", "approx2 performance", "approx3 performance"])
-    plt.xlabel("Graph sizes")
+    return graph_sizes, a1_performance, a2_performance, a3_performance
+
+def experiment2():
+    graph_sizes = []
+    a1_performance = []
+    a2_performance = []
+    a3_performance = []
+    for i in range(2,20):
+        print(i)
+        graph_sizes.append(i)
+        graphs = create_random_graph(1000,i,i-1)
+        sum_mvc = 0
+        sum1 = 0
+        sum2 = 0
+        sum3 = 0
+        for graph in graphs:
+            mvc = MVC(graph)
+            sum_mvc += len(mvc)
+            a1 = approx1(graph)
+            sum1 += len(a1)
+            a2 = approx2(graph)
+            sum2 += len(a2)
+            a3 = approx3(graph)
+            sum3 += len(a3)
+        a1_performance.append(sum1/sum_mvc)
+        a2_performance.append(sum2/sum_mvc)
+        a3_performance.append(sum3/sum_mvc)
+    return graph_sizes, a1_performance, a2_performance, a3_performance
+
+def experiment3():
+    graph_sizes = []
+    a1_performance = []
+    for i in range(1,11):
+        print(i)
+        graph_sizes.append(i)
+        graphs = create_random_graph(10000,5,i)
+        sum_mvc = 0
+        sum1 = 0
+        for graph in graphs:
+            mvc = MVC(graph)
+            sum_mvc += len(mvc)
+            a1 = approx1(graph)
+            sum1 += len(a1)
+        a1_performance.append(sum1/sum_mvc)
+    return graph_sizes, a1_performance
+
+def main():
+    #x, a1_performance, a2_performance, a3_performance = experiment1()
+    #x, a1_performance, a2_performance, a3_performance = experiment2()
+    x, a1_performance = experiment3()
+
+    plt.plot(x, a1_performance)
+    #plt.plot(x, a2_performance)
+    #plt.plot(x, a3_performance)
+    #plt.legend(["approx1", "approx2", "approx3"])
+    plt.xlabel("Number of edges")
     plt.ylabel("Performance (approx# sum / mvc sum)")
     plt.show()
-
-    
 
 if __name__ == "__main__":
     main()
