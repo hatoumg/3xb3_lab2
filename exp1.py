@@ -13,7 +13,7 @@ def create_random_graph(i, j):
             edges += 1
     return graphs
 
-def probability(min=0, inc=1, n=100, e=200, r=1000, f=has_cycle):
+def probability(min=0, inc=1, n=100, e=300, r=1000, f=has_cycle):
     prob = {}
     for i in range(min, e, inc):
         sum = 0
